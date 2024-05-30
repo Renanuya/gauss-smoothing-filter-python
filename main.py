@@ -5,7 +5,6 @@ file_path = 'data/example_data.xlsx'
 data = pd.read_excel(file_path, header=None)
 
 data_as_numpy = data.to_numpy()
-print("Original data size:", data_as_numpy.shape)
 
 gaussian_filter = np.array([[1, 2, 1],
                             [2, 4, 2],
@@ -22,7 +21,7 @@ for i in range(offset, data_as_numpy.shape[0] - offset):
         filtered_value = np.sum(region * gaussian_filter)
         filtered_data[i - offset, j - offset] = filtered_value
 
-print("Smoothed data size:", filtered_data.shape)
+print("Smoothed data matrix:")
 print(filtered_data)
 
 smoothed_data_df = pd.DataFrame(filtered_data)
@@ -30,4 +29,7 @@ smoothed_data_df = pd.DataFrame(filtered_data)
 output_file_path = 'data/smoothed_image.xlsx'
 smoothed_data_df.to_excel(output_file_path, header=False, index=False)
 
+print("------------------------------------")
+print("Original data size:", data_as_numpy.shape)
+print("Smoothed data size:", filtered_data.shape)
 print("The smoothed data was saved successfully:", output_file_path)
